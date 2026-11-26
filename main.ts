@@ -19,6 +19,12 @@ function codePointLength(s) {
 function validate(line) {
   if (line.length === 0) throw new Error("entry is empty");
   if (line.trim().length === 0) throw new Error("entry is only whitespace");
+  if (line !== line.trim()) {
+    throw new Error("entry must not have leading or trailing whitespace");
+  }
+  if (/\s{2,}/.test(line)) {
+    throw new Error("entry must not contain doubled whitespace");
+  }
   if (line.includes("\n") || line.includes("\r")) {
     throw new Error("entry must be a single line");
   }
